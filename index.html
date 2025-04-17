@@ -1,49 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" x-data="portfolio()">
-
-  
-<!-- put this inside your <body> (after your <header> or wherever) -->
-<section class="container mx-auto bg-white py-16 px-6 md:px-20 flex flex-col md:flex-row items-center justify-center">
-  <!-- avatar -->
-  <div class="flex-shrink-0">
-    <img
-      src="headshot.jpg"        
-      alt="Liyang Ng"
-      class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-lg
-    />
-  </div>
-
-  <!-- text block -->
-  <div class="mt-8 md:mt-0 md:ml-12 text-center md:text-left">
-    <h1 class="font-serif">
-      <!-- “Hello,” -->
-      <span class="block text-4xl md:text-5xl italic text-gray-900">
-        Hello,
-      </span>
-      <!-- “I am Liyang!” -->
-      <span class="block text-5xl md:text-7xl italic text-amber-700 mt-2">
-        I am Liyang!
-      </span>
-    </h1>
-
-    <!-- sub‑headline -->
-    <p class="mt-6 text-lg md:text-xl text-gray-700 max-w-md mx-auto md:mx-0">
-     I love to make complex things simple. I love to solve problems. I love to make the people around me better.
-    </p>
-
-    <!-- “Hire me” CTA with little SVG flourish underline -->
-    <a
-      href="#contact"
-      class="relative inline-block mt-8 font-serif italic text-amber-700 text-xl"
-    >
-      Hire me
-     
-    </a>
-  </div>
-</section>
-
-
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -73,14 +29,38 @@
         }
       }
     }
+    
+    // Interactive fun facts component
+    function funFacts() {
+      return {
+        facts: [
+          'I once coded for 24 hours straight!',
+          'I lead a youth ministry at my local church.',
+          'I love brewing coffee every morning.',
+          'I completed a marathon in under 4 hours.',
+          'I enjoy mixing cocktails in my spare time.'
+        ],
+        currentIndex: 0,
+        get currentFact() {
+          return this.facts[this.currentIndex];
+        },
+        nextFact() {
+          this.currentIndex = (this.currentIndex + 1) % this.facts.length;
+        }
+      }
+    }
   </script>
 </head>
 <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
   <!-- Header -->
-
+  <header class="bg-blue-900 text-white p-6 text-center">
+    <h1 class="text-4xl font-bold">Liyang Ng</h1>
+    <p class="mt-2 text-lg">Supply Chain Analyst • Developer • Learner</p>
+  </header>
 
   <!-- Main Content -->
   <main class="flex-grow container mx-auto px-4 py-8">
+
     <!-- Projects Section -->
     <section class="mb-12">
       <h2 class="text-2xl font-semibold mb-4">Projects</h2>
@@ -112,6 +92,15 @@
       </div>
     </section>
 
+    <!-- Interactive Fun Facts Section -->
+    <section x-data="funFacts()" class="mb-12 bg-white p-6 rounded shadow">
+      <h2 class="text-2xl font-semibold mb-4">Fun Facts</h2>
+      <p class="text-lg mb-4" x-text="currentFact"></p>
+      <button @click="nextFact()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+        Show me another fact
+      </button>
+    </section>
+
     <!-- File Upload Section -->
     <section class="mb-12">
       <h2 class="text-2xl font-semibold mb-4">Upload & Preview</h2>
@@ -120,7 +109,6 @@
       <div x-show="selectedFile" class="p-4 bg-white shadow rounded scrollbar max-h-40 overflow-y-auto">
         <p><strong>Filename:</strong> <span x-text="selectedFile.name"></span></p>
         <p><strong>Size:</strong> <span x-text="(selectedFile.size/1024).toFixed(2) + ' KB'"></span></p>
-        <!-- Add previews (e.g., images) if needed -->
       </div>
     </section>
 
@@ -132,19 +120,4 @@
 
     <!-- Contact Section -->
     <section>
-      <h2 class="text-2xl font-semibold mb-4">Contact</h2>
-      <p>Email: <a href="mailto:ngliyang1999@gmail.com" class="text-blue-600 underline">ngliyang1999@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/ngliyang/" target="_blank" class="text-blue-600 underline">www.linkedin.com/in/ngliyang</a></p>
-    </section>
-  </main>
-
-
- <!-- Footer -->
-  <footer class="bg-blue-900 text-white text-center p-4">
-    &copy; 2025 Liyang Ng. Never Stop Learning.
-  </footer>
-</body>
-</html>
-
-
-
+      <h2 class="text-2xl font-semibold mb-4">Contact</n
