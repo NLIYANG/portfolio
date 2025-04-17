@@ -103,3 +103,65 @@
   </footer>
 </body>
 </html>
+
+
+<!-- put this inside your <body> (after your <header> or wherever) -->
+<section class="bg-[#FFFFFF] py-16 px-6 md:px-20 flex flex-col md:flex-row items-center">
+  <!-- avatar -->
+  <div class="flex-shrink-0">
+    <img
+      src="headshot.jpg"          <!-- swap in your image path -->
+      alt="Liyang Ng"
+      class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-lg"
+    />
+  </div>
+
+  <!-- text block -->
+  <div class="mt-8 md:mt-0 md:ml-12 text-center md:text-left">
+    <h1 class="font-serif">
+      <!-- “Hello,” -->
+      <span class="block text-4xl md:text-5xl italic text-gray-900">
+        Hello,
+      </span>
+      <!-- “I am Liyang!” -->
+      <span class="block text-5xl md:text-7xl italic text-amber-700 mt-2">
+        I am Liyang!
+      </span>
+    </h1>
+
+    <!-- sub‑headline -->
+    <p class="mt-6 text-lg md:text-xl text-gray-700 max-w-md mx-auto md:mx-0">
+      I believe brevity is key. My print and digital designs are all
+      about minimalism and elegance.
+    </p>
+
+    <!-- “Hire me” CTA with little SVG flourish underline -->
+    <a
+      href="#contact"
+      class="relative inline-block mt-8 font-serif italic text-amber-700 text-xl"
+    >
+      Hire me
+      <svg
+        class="absolute -bottom-1 left-1/2 transform -translate-x-1/2"
+        width="120"
+        height="16"
+        viewBox="0 0 120 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 8 C30 0, 90 16, 120 8"
+          stroke="#A35220"
+          stroke-width="2"
+          fill="none"
+          stroke-linecap="round"
+        />
+      </svg>
+    </a>
+  </div>
+</section>
+
+
+
+
+
