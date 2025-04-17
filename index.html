@@ -1,5 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" x-data="portfolio()">
+
+<!-- put this inside your <body> (after your <header> or wherever) -->
+<section class="container mx-auto bg-white py-16 px-6 md:px-20 flex flex-col md:flex-row items-center justify-center">
+  <!-- avatar -->
+  <div class="flex-shrink-0">
+    <img
+      src="headshot.jpg"        
+      alt="Liyang Ng"
+      class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-lg
+    />
+  </div>
+
+  <!-- text block -->
+  <div class="mt-8 md:mt-0 md:ml-12 text-center md:text-left">
+    <h1 class="font-serif">
+      <!-- “Hello,” -->
+      <span class="block text-4xl md:text-5xl italic text-gray-900">
+        Hello,
+      </span>
+      <!-- “I am Liyang!” -->
+      <span class="block text-5xl md:text-7xl italic text-amber-700 mt-2">
+        I am Liyang!
+      </span>
+    </h1>
+
+    <!-- sub‑headline -->
+    <p class="mt-6 text-lg md:text-xl text-gray-700 max-w-md mx-auto md:mx-0">
+     I love to make complex things simple. I love to solve problems. I love to make the people around me better.
+    </p>
+
+    <!-- “Hire me” CTA with little SVG flourish underline -->
+    <a
+      href="#contact"
+      class="relative inline-block mt-8 font-serif italic text-amber-700 text-xl"
+    >
+      Hire me
+     
+    </a>
+  </div>
+</section>
+
+
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -97,45 +140,6 @@
     </section>
   </main>
 
-<!-- put this inside your <body> (after your <header> or wherever) -->
-<section class="container mx-auto bg-white py-16 px-6 md:px-20 flex flex-col md:flex-row items-center justify-center">
-  <!-- avatar -->
-  <div class="flex-shrink-0">
-    <img
-      src="headshot.jpg"        
-      alt="Liyang Ng"
-      class="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-lg
-    />
-  </div>
-
-  <!-- text block -->
-  <div class="mt-8 md:mt-0 md:ml-12 text-center md:text-left">
-    <h1 class="font-serif">
-      <!-- “Hello,” -->
-      <span class="block text-4xl md:text-5xl italic text-gray-900">
-        Hello,
-      </span>
-      <!-- “I am Liyang!” -->
-      <span class="block text-5xl md:text-7xl italic text-amber-700 mt-2">
-        I am Liyang!
-      </span>
-    </h1>
-
-    <!-- sub‑headline -->
-    <p class="mt-6 text-lg md:text-xl text-gray-700 max-w-md mx-auto md:mx-0">
-     I love to make complex things simple. I love to solve problems. I love to make the people around me better.
-    </p>
-
-    <!-- “Hire me” CTA with little SVG flourish underline -->
-    <a
-      href="#contact"
-      class="relative inline-block mt-8 font-serif italic text-amber-700 text-xl"
-    >
-      Hire me
-     
-    </a>
-  </div>
-</section>
 
  <!-- Footer -->
   <footer class="bg-blue-900 text-white text-center p-4">
