@@ -1,86 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" x-data="portfolio()">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Liyang Ng | Portfolio</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js for Interactivity -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background: #333;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    section {
-      padding: 2rem 4rem;
-      max-width: 900px;
-      margin: auto;
-    }
-    h1, h2 {
-      color: #ffffff;
-    }
-    .project {
-      margin-bottom: 2rem;
-      padding: 1rem;
-      border-left: 4px solid #007acc;
-      background: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    footer {
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 4rem;
-    }
-    a {
-      color: #007acc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+    /* Custom scrollbar for file preview */
+    .scrollbar::-webkit-scrollbar { width: 6px; }
+    .scrollbar::-webkit-scrollbar-thumb { background-color: rgba(100,100,100,0.4); border-radius: 3px; }
   </style>
+  <script>
+    function portfolio() {
+      return {
+        filter: '',
+        projects: [
+          { id: 1, title: 'Quiz App', desc: 'A fun quiz app built with JS & HTML.', url: '#', tags: ['JS','HTML'] },
+          { id: 2, title: 'Forecast Dashboard', desc: 'Power BI dashboard to optimize inventory.', url: '#', tags: ['Power BI'] }
+          // add more projects here
+        ],
+        selectedFile: null,
+        showModal: null,
+        filteredProjects() {
+          return this.projects.filter(p => p.title.toLowerCase().includes(this.filter.toLowerCase()));
+        }
+      }
+    }
+  </script>
 </head>
-<body>
-
-  <header>
-    <h1>Liyang Ng</h1>
-    <p>Supply Chain Analyst • Developer • Learner</p>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-blue-900 text-white p-6 text-center">
+    <h1 class="text-4xl font-bold">Liyang Ng</h1>
+    <p class="mt-2 text-lg">Supply Chain Analyst • Developer • Learner</p>
   </header>
 
-  <section>
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Quiz App</h3>
-      <p>A fun quiz app built with JavaScript and HTML. <a href="#">View Project</a></p>
-    </div>
-    <div class="project">
-      <h3>Forecast Dashboard</h3>
-      <p>Power BI dashboard to optimize inventory and shipping. <a href="#">Coming Soon</a></p>
-    </div>
-  </section>
+  <!-- Main Content -->
+  <main class="flex-grow container mx-auto px-4 py-8">
+    <!-- Projects Section -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">Projects</h2>
+      <input x-model="filter" type="text" placeholder="Search projects..." 
+             class="w-full mb-4 p-2 border rounded" />
+      <div class="grid md:grid-cols-2 gap-6">
+        <template x-for="project in filteredProjects()" :key="project.id">
+          <div @click="showModal = project" 
+               class="cursor-pointer p-4 bg-white shadow rounded hover:shadow-lg transition">
+            <h3 class="text-xl font-semibold" x-text="project.title"></h3>
+            <p class="mt-2 text-gray-600" x-text="project.desc"></p>
+            <div class="mt-3 space-x-2">
+              <template x-for="tag in project.tags" :key="tag">
+                <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 text-sm rounded" x-text="tag"></span>
+              </template>
+            </div>
+          </div>
+        </template>
+      </div>
+      <!-- Project Modal -->
+      <div x-show="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div @click.outside="showModal = null" 
+             class="bg-white w-11/12 md:w-1/2 p-6 rounded-lg shadow-lg">
+          <h3 class="text-2xl font-bold" x-text="showModal.title"></h3>
+          <p class="mt-4 text-gray-700" x-text="showModal.desc"></p>
+          <a :href="showModal.url" target="_blank" class="mt-4 inline-block text-blue-600 underline">View Project</a>
+          <button @click="showModal = null" class="mt-4 px-4 py-2 bg-red-500 text-white rounded">Close</button>
+        </div>
+      </div>
+    </section>
 
-  <section>
-    <h2>About Me</h2>
-    <p>I’m a passionate analyst and web tinkerer who loves solving problems through data and design. Currently based in Tampa, FL. I lead youth ministries, build dashboards, and experiment with web tools in my spare time.</p>
-  </section>
+    <!-- File Upload Section -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">Upload & Preview</h2>
+      <input type="file" @change="e => selectedFile = e.target.files[0]" 
+             class="block mb-4" />
+      <div x-show="selectedFile" class="p-4 bg-white shadow rounded scrollbar max-h-40 overflow-y-auto">
+        <p><strong>Filename:</strong> <span x-text="selectedFile.name"></span></p>
+        <p><strong>Size:</strong> <span x-text="(selectedFile.size/1024).toFixed(2) + ' KB'"></span></p>
+        <!-- Add previews (e.g., images) if needed -->
+      </div>
+    </section>
 
-  <section>
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a><br>
-    LinkedIn: <a href="https://www.linkedin.com/in/yourprofile" target="_blank">Your LinkedIn</a></p>
-  </section>
+    <!-- About Section -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold mb-4">About Me</h2>
+      <p>I’m a passionate analyst and web tinkerer who loves solving problems through data and design. Currently based in Tampa, FL. I lead youth ministries, build dashboards, and experiment with web tools in my spare time.</p>
+    </section>
 
-  <footer>
+    <!-- Contact Section -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">Contact</h2>
+      <p>Email: <a href="mailto:liyang.ng@example.com" class="text-blue-600 underline">liyang.ng@example.com</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/liyangng" target="_blank" class="text-blue-600 underline">linkedin.com/in/liyangng</a></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-900 text-white text-center p-4">
     &copy; 2025 Liyang Ng. Built with 💻 and ☕
   </footer>
-
 </body>
 </html>
